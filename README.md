@@ -36,9 +36,9 @@ It also:
 
 ### Implementation Details
 
-- **Tested on Railway:** PENDING
+- **Tested on Railway:** the first boot created the schema and the admin; `guacadmin` / `guacadmin` and a wrong password were refused and the admin logged in with full rights; an SSH connection added through the API opened over the browser tunnel, through guacd, to an SSH server in the same project, and a command typed into it ran there. RDP and VNC weren't tested.
 - **Variables after the first boot:** `ADMIN_USERNAME` and `ADMIN_PASSWORD` are read once. Change the password in Guacamole's settings afterwards; editing the variables does nothing.
-- **Memory:** PENDING
+- **Memory:** runs on the Free plan's 0.5 GB per service. Idle, the web app (Tomcat) uses about 330 MB, guacd and Postgres about 12 MB each; with three SSH sessions open, the web app was at 360 MB and guacd at 70 MB, with no out-of-memory kills. guacd grows with each open session, and RDP desktops take more than SSH, so many sessions want a bigger plan.
 - **Images:** the web app is `ghcr.io/two-workspaces/guacamole`, built from this repository's Dockerfile on `guacamole/guacamole:1.6.0` with `postgresql-client` added for the first-boot setup; guacd is the official `guacamole/guacd:1.6.0`.
 
 ## Why Deploy Apache Guacamole on Railway?
